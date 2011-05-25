@@ -1,0 +1,12 @@
+邮件心得：
+gmail有boundry，分text/plain和text/html
+
+thunderbird只有text/plain
+
+Message-ID: 格式不同，但是referrence都一样
+
+与其说是邮件系统，不如说是论坛的邮件插件。
+
+这只是邮件接收后的格式，还需了解邮件发送格式，或者暗箱操作？
+比如Message-ID：的生成，reference的保存
+GAE 数据库的key为message-ID？

@@ -1,0 +1,26 @@
+因为基于GAE有的邮件收发调试太困难，目前是通过gmail的SMTP 和 IMAP
+服务基于本地开发。
+目前跑通了基本的组建服务。
+
+mg_sys/
+    api_42qu.py             调用42区的api获取邮箱地址对应的网址
+    download_mail.py        下载邮件（测试用）
+    generate_mail.py        产生邮件组建
+    __init__.py             python目录初始化文件  
+    local_email.cfg         邮箱连接配置文件
+    mail.log                邮件记录
+    main.py                 主文件（测试）
+    mg_log.py               logging系统配置文件
+    mg_receive.py           邮件接收服务组件
+    mg_send.py              邮件发送服务组建
+    mg_sys.log              邮件系统记录
+    parse_mail.py           解分邮件
+    send3.py                测试邮件发送
+
+使用方法:
+cd mg_sys
+cp local_email.cfg.example local_email.cfg
+打开local_email.cfg 填写好自己的gmail邮箱帐号和密码
+python send3.py
+python main.py
+
