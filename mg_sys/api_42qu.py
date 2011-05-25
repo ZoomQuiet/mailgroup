@@ -1,4 +1,5 @@
 import urllib2
+import json
 
 def get_url(email_address):
     '''get the url for the email in 42qu
@@ -12,7 +13,7 @@ def get_url(email_address):
     '''
     prefix_url = 'http://api.42qu.com/search/man/'
     response = urllib2.urlopen(prefix_url + email_address)
-    dict = eval(response.read())
+    dict = json.loads(response.read())
     prefix_url = 'http://42qu.com/-'
     return prefix_url + str(dict['id'])
 
