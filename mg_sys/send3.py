@@ -21,5 +21,5 @@ msg['To'] = 'silegon@gmail.com'
 # Send the message via our own SMTP server, but don't include the
 # envelope header.
 s = mg_send.smtp_connection()
-s.sendmail('silegon', 'silegon@gmail.com', msg.as_string())
+s.sendmail('xdwea', 'silegon@gmail.com', msg.as_string())
 s.quit()

@@ -1,0 +1,71 @@
+群
+创建群
+绑定用户
+删除用户
+
+用户
+创建用户
+更新用户签名档
+
+邮件
+发送邮件(新建主题)
+回复(某楼的邮件)
+
+全部用邮件实现？
+设计mailgroup 系统语法：
+
+系统命令的标题为：
+system
+
+创建群：
+group create (group_name)
+示例：
+创建群名为42区的群
+发送名为system的邮件到 mailgroup系统，内容为
+group create 42qu
+
+系统会回复一封邮件，是否创建成功。
+
+admin
+group_admin
+usr
+
+创建群：
+admin create (group_name);
+
+绑定群管理员：
+admin bind (group_name) (user_email,...);
+
+删除群管理员：
+admin del (group_name) (user_email,...);
+
+绑定用户
+group bind (group_name) (user_email,...);
+
+删除用户
+group del  (group_name) (user_email,...);
+
+退订群组
+user unsubscribe (group_name);
+
+#更新用户签名
+#user update (user_profile);
+
+权限
+管理员可以创建群，群主可以创建群成员，用户可以退订邮件，更新自己的资料等等。
+
+每个人收到的第一封系统邮件，会是mailgroup系统的邮件命令系统操作说明。
+
+为什么这样做？
+全部可以利用邮件功能实现，简化系统不必要的web操作。
+要保证进度，保证核心功能的同时做减法。
+
+create table user_group(
+    group_id int not null,
+    user_id int not null,
+    status int default 0
+)default charset=utf8;
+alter table user_group add primary key (group_id, user_id);
+通过该表的 status 字段设定权限。
+
+
