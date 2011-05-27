@@ -7,17 +7,23 @@ path = os.path.normpath(os.path.join(os.getcwd(), __file__))
 path = os.path.split(path)[0]
 
 fmt = '%(asctime)s %(name)s %(levelname)s:%(message)s'
+tempfmt = '%(asctime)s %(message)s'
 datefmt = '%H:%M:%S %y/%m/%d'
 
 mailFormatter = logging.Formatter(fmt, datefmt)
-mailHandler = logging.FileHandler(path + '/mail.log',mode='a',encoding='utf8')
+mailHandler = logging.FileHandler(path + '/log/mail.log',mode='a',encoding='utf8')
 mailHandler.setLevel(logging.INFO)
 mailHandler.setFormatter(mailFormatter)
 
 sysFormatter = logging.Formatter(fmt, datefmt)
-sysHandler = logging.FileHandler(path + '/mg_sys.log',mode='a',encoding='utf8')
+sysHandler = logging.FileHandler(path + '/log/mg_sys.log',mode='a',encoding='utf8')
 sysHandler.setLevel(logging.INFO)
 sysHandler.setFormatter(sysFormatter)
+
+tempFormatter = logging.Formatter(tempfmt, datefmt)
+tempHandler = logging.FileHandler(path + '/log/temp.log',mode='w',encoding='utf8')
+tempHandler.setLevel(logging.INFO)
+tempHandler.setFormatter(tempFormatter)
 
 shellFormatter = logging.Formatter(fmt, datefmt)
 shellHandler = logging.StreamHandler(sys.stdout,)
@@ -45,3 +51,10 @@ def sysLogger():
     sysLogger.addHandler(shellHandler)
     return sysLogger
 
+def tempLogger():
+    tempLogger = logging.getLogger("tempLogger")
+    tempLogger.setLevel(logging.INFO)
+    tempLogger.addHandler(tempHandler)
+    tempLogger.addHandler(sysHandler)
+    tempLogger.addHandler(shellHandler)
+    return tempLogger

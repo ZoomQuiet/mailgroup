@@ -15,6 +15,7 @@
 .*\.xz
 .*\.cfg
 .*\.eml
+.*\.log
 ~$
 ^build/*
 
