@@ -52,8 +52,8 @@ admin del (group_name) (user_email,...);
 绑定用户
 group bind (group_name) (user_email,...);
 
-删除用户
-group del  (group_name) (user_email,...);
+解除绑定用户
+group unbind (group_name) (user_email,...);
 
 退订群组
 user unsubscribe (group_name);

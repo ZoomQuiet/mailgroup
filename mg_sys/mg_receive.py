@@ -37,6 +37,7 @@ def get_new_mail():
     if imap == None:
         imap = imap_connection() 
         imap.select('inbox')
+    imap.check()
     type, data = imap.search('utf-8','(unseen)')
     if type == 'OK':
         if len(data) > 0:

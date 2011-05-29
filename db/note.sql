@@ -8,5 +8,5 @@ select mg_user.mailbox, mg_group.gname, user_group.status from mg_user,user_grou
 
 select mg_user.mailbox, mg_group.gname, user_group.status from mg_user,user_group,mg_group where mg_user.id = user_group.user_id and mg_group.id=user_group.group_id and mg_user.mailbox="silegon@gmail.com" and mg_group.gname="cpyug";
 
-
+select mg_user.mailbox from mg_user, user_group where user_group.group_id=4 and user_group.user_id=mg_user.id;
 

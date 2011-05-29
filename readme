@@ -1,26 +1,95 @@
-因为基于GAE有的邮件收发调试太困难，目前是通过gmail的SMTP 和 IMAP
-服务基于本地开发。
-目前跑通了基本的组建服务。
+项目简介：
+因为GFW的原因，所以要做个好用点邮件组系统，主要向google groups学习。
 
-mg_sys/
-    api_42qu.py             调用42区的api获取邮箱地址对应的网址
-    download_mail.py        下载邮件（测试用）
-    generate_mail.py        产生邮件组建
-    __init__.py             python目录初始化文件  
-    local_email.cfg         邮箱连接配置文件
-    mail.log                邮件记录
-    main.py                 主文件（测试）
-    mg_log.py               logging系统配置文件
-    mg_receive.py           邮件接收服务组件
-    mg_send.py              邮件发送服务组建
-    mg_sys.log              邮件系统记录
-    parse_mail.py           解分邮件
-    send3.py                测试邮件发送
+下一个阶段：
+优先级别：
+高：
+增加异常处理，提高稳定性
+附加标签的展现
+中：
+邮件传输性能
+MIMIE的研究与跟进
+低：
+数据库性能
 
-使用方法:
-cd mg_sys
-cp local_email.cfg.example local_email.cfg
-打开local_email.cfg 填写好自己的gmail邮箱帐号和密码
-python send3.py
-python main.py
+也许：
+增加GAE版本
+
+目前阶段：
+基本能本地运行
+
+目前阶段问题：
+邮件发件人的展现形式
+邮件附加标签的展现形式
+
+mailgroup目录：
+.. (up a dir)
+/home/silegon/mailgroup/
+|~db/
+| |-42qu操作                        
+| |-mailgroup.mwb
+| |-mg.sql
+| |-note.sql
+| `-mailgroup.mwb.bak
+|~mail_source/
+| |~createmail/
+| | |-邮件格式
+| | `-邮件格式心得
+| `+download/
+|~mg_sys/
+| |~log/                      保存记录的文件夹，由mg_log生成记录             
+| |~test/                     基本可以不用管，
+| | |-download_mail.py        用来把gmail邮箱里面的邮件全部下载保存
+| | `-send3.py               
+| |-__init__.py
+| |-api_42qu.py               42区的api调用接口，返回用户在42区的信息
+| |-local_email.cfg.example   本地配置文件模板，用来保存各种配置参数
+| |-main.py                   主文件，后面介绍使用
+| |-mg_log.py                 log配置文件，用来配置各种logger
+| |-mg_process.py             system邮件处理，比如产生群，添加群管理员什么的
+| |-mg_receive.py             IMAP接口调用
+| |-mg_send.py                SMTP接口调用
+| `-mg_util.py                各种公用util
+|-__init__.py
+`-readme                      本文件
+
+测试环境安装方法：
+依赖环境：
+python2.7
+MySQL         
+MySQLdb-python （python，Mysql连接包）  http://sourceforge.net/projects/mysql-python/
+一个Gmail帐号，开启IMAP
+另外的我的操作系统是Ubuntu 11.04 x64应该不会产生问题
+
+安装步骤：
+1.安装MySQL，记住帐号密码。
+2.运行 mailgroup/db/mg.sql   建立数据库
+3.复制local_email.cfg.example 到 local_email.cfg 改好各个参数,特别注意把
+[mailgroup_admin]中的admin改成你的邮箱，否则不能通过系统邮件.当然你也可一直接到数据库操作：）
+4.发系统邮件到mailgroup的服务邮箱，系统邮件的语法参考mailgroup\db\42qu操作，操作完有系统会回复一封邮件
+注意：1）所绑定的邮箱地址必须要在42qu注册过。2）目前只有第一个邮件组的人才能收到邮件
+
+现在，应该就可以往mailgroup邮箱发送邮件了。幸运的话，第一个邮件组的成员会在垃圾邮件的标签中看到相关邮件。：）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

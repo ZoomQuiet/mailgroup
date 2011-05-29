@@ -1,3 +1,4 @@
+create database mailgroup;
 use mailgroup;
 create table mg_user(
     id int primary key auto_increment not null,
