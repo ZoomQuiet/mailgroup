@@ -8,7 +8,10 @@ import email.header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import api_42qu
+import mg_log
 import ConfigParser
+
+op_log = mg_log.tempLogger()
 
 def connection():
     config = ConfigParser.RawConfigParser()
@@ -126,7 +129,7 @@ def get_userid(mailbox, add_mailbox=False):
             work_c.execute(sql%(url, mailbox))
             return get_userid(mailbox)
         else:
-            log.warning("%s isn't 42qu user!"%mailbox)
+            op_log.warning("%s isn't 42qu user!"%mailbox)
         return False
     else:
         return False

@@ -1,0 +1,6 @@
+标题：
+system
+正文：
+admin create 42qu;
+admin bind 42qu silegon@gmail.com,zsp007@gmail.com;
+group bind 42qu xxx@gmail.com,yyy@gmail.com,zzz@gmail.com;

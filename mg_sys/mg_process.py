@@ -1,12 +1,11 @@
 import re
 import email
 from email.mime.text import MIMEText
-import parse_mail
-import generate_mail
 import api_42qu
 import mg_log
 from mg_util import connection, get_userid, get_groupid, get_status
 from mg_util import USER_PERMISSION, GROUP_PERMISSION, admin_permission
+from mg_util import parse_email_payload, encode_header
 
 log = mg_log.tempLogger()
     
@@ -80,7 +79,8 @@ def group_op(st, mailbox):
                 log.info("Binding %s to %s success!"%\
                                     (mailbox,gname))
             else:
-                log.warning("%s already is the member of %s."%(mailbox, gname))
+                if user_id:
+                    log.warning("%s already is the member of %s."%(mailbox, gname))
     elif command == 'unbind':
         for mailbox in mailbox_list:
             group_id = get_groupid(gname)
@@ -116,7 +116,7 @@ def help_op(command, st):
     log.info("Error command:%s %s"%(command,st))
 
 def system_mail(rmail):
-    payload_dict = parse_mail.parse_email_payload(rmail)
+    payload_dict = parse_email_payload(rmail)
     payload = payload_dict['plain']
     mailbox = re.search(r'[\w\-][\w\-\.]+@[\w\-]+\.[a-zA-Z]{1,4}',
                          rmail['from']).group()
@@ -145,10 +145,10 @@ def system_mail(rmail):
     file.close()
     smail = MIMEText(spayload, 'plain', 'utf-8')
     subject = "maigroup system receipt"
-    smail['Subject'] = generate_mail.encode_header(subject)
+    smail['Subject'] = encode_header(subject)
     smail['To'] = mailbox
-    smail['X-Group'] = 0 #The system mail group is 0
-    smail['X-Topic'] = 0 #The system mail topic is 0
+    smail['X-Group'] = str(0) #The system mail group is 0
+    smail['X-Topic'] = str(0) #The system mail topic is 0
     return smail
 
 if __name__ == '__main__':
